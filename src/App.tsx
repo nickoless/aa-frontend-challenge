@@ -1,13 +1,14 @@
-// import logo from './logo.svg';
-import './App.css';
-import { useEffect } from 'react';
-import Gallery from 'Gallery';
+import Gallery from 'components/Gallery';
+import { APIContextProvider } from 'contexts/APIContext';
+import { ImageContextProvider } from 'contexts/ImageContext';
 
 const App = () => {
     return (
-        <div className="App">
-            <Gallery />
-        </div>
+        <APIContextProvider>
+            <ImageContextProvider>
+                <Gallery />
+            </ImageContextProvider>
+        </APIContextProvider>
     );
 };
 
