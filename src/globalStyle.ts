@@ -7,6 +7,7 @@ export const theme = {
     backgroundSecondary: '#E6E9EC',
     textPrimary: '#343a40',
     textSecondary: '#6c757d',
+    highlight: '#612CE8',
     border: '#D3D9DD'
 };
 
@@ -17,14 +18,11 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         background: ${theme.backgroundPrimary};
         color: ${theme.textPrimary};
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Lato', sans-serif;
     }
 
     p {
         color: ${theme.textPrimary};
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 `;
 

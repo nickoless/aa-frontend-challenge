@@ -1,6 +1,6 @@
+import GlobalStyle from 'globalStyle';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import GlobalStyle from 'globalStyle';
 
 import App from 'App';
 

@@ -14,3 +14,16 @@ export const formatBytes = (bytes: number, decimals: number = 1) => {
 
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 };
+
+/**
+ * Formats a date string into "month (string) day (num), year (num)"
+ * @param dateString
+ */
+export const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const month = date.toLocaleString('en-us', { month: 'short' });
+    const day = date.toLocaleString('en-us', { day: 'numeric' });
+    const year = date.toLocaleString('en-us', { year: 'numeric' });
+
+    return `${month} ${day}, ${year}`;
+};
