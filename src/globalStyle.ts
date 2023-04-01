@@ -16,7 +16,7 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
-        background: ${theme.backgroundPrimary};
+        background: ${theme.backgroundSecondary};
         color: ${theme.textPrimary};
         font-family: 'Lato', sans-serif;
     }

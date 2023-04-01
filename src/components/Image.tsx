@@ -1,32 +1,40 @@
-import { theme } from 'globalStyle';
-import styled from 'styled-components';
-import { formatBytes } from 'utils';
-import { ImageDetailsContext } from 'contexts/ImageDetailsContext';
 import { useContext } from 'react';
-import { Image as ImageType } from 'contexts/ImagesContext';
+import styled from 'styled-components';
+
 import { ReactComponent as Heart } from 'assets/heart.svg';
+import { Image as ImageType } from 'context/ImageAPIContext';
+import { ImageIdContext } from 'context/ImageIdContext';
+import { theme } from 'globalStyle';
+import useFavoriteImage from 'hooks/useFavoriteImage';
+import { formatBytes } from 'utils';
 
 interface Props {
     image: ImageType;
-    sidePanel?: boolean;
+    imagePanel?: boolean;
 }
 
-const Image = ({ image, sidePanel }: Props) => {
-    const { imageDetails, setImageDetails } = useContext(ImageDetailsContext);
-    const isSelected =
-        !sidePanel && JSON.stringify(image) === JSON.stringify(imageDetails);
+const Image = ({ image, imagePanel }: Props) => {
+    const { imageId, setImageId } = useContext(ImageIdContext);
+    const { favoriteImage } = useFavoriteImage();
+
+    const isSelected = !imagePanel && image.id === imageId;
 
     return (
-        <ImageWrapper $sidePanel={sidePanel}>
+        <ImageWrapper $imagePanel={imagePanel}>
             <ImageEl
-                onClick={() => setImageDetails(image)}
-                $sidePanel={sidePanel}
                 $isSelected={isSelected}
+                $imagePanel={imagePanel}
+                onClick={() => setImageId(image.id)}
                 src={image.url}
             />
-            <FilenameWrapper $sidePanel={sidePanel}>
-                <Filename $sidePanel={sidePanel}>{image.filename}</Filename>
-                {sidePanel && <HeartIcon />}
+            <FilenameWrapper $imagePanel={imagePanel}>
+                <Filename $imagePanel={imagePanel}>{image.filename}</Filename>
+                {imagePanel && (
+                    <HeartIcon
+                        $favorited={image.favorited}
+                        onClick={() => favoriteImage(image.id)}
+                    />
+                )}
             </FilenameWrapper>
             <Filesize>{formatBytes(image.sizeInBytes)}</Filesize>
         </ImageWrapper>
@@ -38,35 +46,35 @@ export default Image;
 // STYLES
 
 const ImageWrapper = styled.article`
-    max-width: ${({ $sidePanel }) => ($sidePanel ? '500px' : '250px')};
+    max-width: ${({ $imagePanel }) => ($imagePanel ? '500px' : '250px')};
 `;
 
-const ImageEl = styled.img<{ $sidePanel?: boolean; $isSelected: boolean }>`
+const ImageEl = styled.img<{ $imagePanel?: boolean; $isSelected: boolean }>`
     cursor: pointer;
-    height: ${({ $sidePanel }) => ($sidePanel ? '300px' : '175px')};
-    width: ${({ $sidePanel }) => ($sidePanel ? '500px' : '250px')};
+    height: ${({ $imagePanel }) => ($imagePanel ? '300px' : '175px')};
+    width: ${({ $imagePanel }) => ($imagePanel ? '500px' : '250px')};
     border-radius: 10px;
     object-fit: cover;
     box-sizing: border-box;
 
     :hover {
-        ${({ $sidePanel }) =>
-            !$sidePanel && 'outline: 3px solid pink; outline-offset: 0.2rem;'};
+        ${({ $imagePanel }) =>
+            !$imagePanel && `outline: 3px solid ${theme.highlight}; outline-offset: 0.2rem;`};
     }
     ${({ $isSelected }) =>
-        $isSelected && 'outline: 3px solid pink; outline-offset: 0.2rem;'};
+        $isSelected && `outline: 3px solid ${theme.highlight}; outline-offset: 0.2rem;`};
 `;
 
-const FilenameWrapper = styled.div<{ $sidePanel?: boolean }>`
+const FilenameWrapper = styled.div<{ $imagePanel?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: ${({ $sidePanel }) => ($sidePanel ? '1rem' : '0.5rem')};
+    margin-top: ${({ $imagePanel }) => ($imagePanel ? '1rem' : '0.5rem')};
     margin-bottom: 0.25rem;
 `;
 
-const Filename = styled.p<{ $sidePanel?: boolean; $isSelected: boolean }>`
-    font-size: ${({ $sidePanel }) => ($sidePanel ? '1.5rem' : '1rem')};
+const Filename = styled.p<{ $imagePanel?: boolean; $isSelected: boolean }>`
+    font-size: ${({ $imagePanel }) => ($imagePanel ? '1.5rem' : '1rem')};
     font-weight: bold;
     margin: 0;
     white-space: nowrap;
@@ -79,8 +87,11 @@ const Filesize = styled.p`
     color: ${theme.textSecondary};
 `;
 
-const HeartIcon = styled(Heart)`
+const HeartIcon = styled(Heart)<{ $favorited: boolean }>`
+    cursor: pointer;
     height: 30px;
     width: 30px;
     stroke: ${theme.textSecondary};
+
+    ${({ $favorited }) => $favorited && 'stroke: red; fill: red'};
 `;

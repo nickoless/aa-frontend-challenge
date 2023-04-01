@@ -16,14 +16,15 @@ export const formatBytes = (bytes: number, decimals: number = 1) => {
 };
 
 /**
- * Formats a date string into "month (string) day (num), year (num)"
+ * Formats a valid date string into "month (string) day (num), year (num)"
  * @param dateString
  */
 export const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const month = date.toLocaleString('en-us', { month: 'short' });
-    const day = date.toLocaleString('en-us', { day: 'numeric' });
-    const year = date.toLocaleString('en-us', { year: 'numeric' });
+    const date = new Date(dateString).toLocaleString('en-us', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
 
-    return `${month} ${day}, ${year}`;
+    return date;
 };
