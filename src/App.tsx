@@ -3,13 +3,7 @@ import { ImageAPIContextProvider } from 'context/ImageAPIContext';
 import { ImageIdContextProvider } from 'context/ImageIdContext';
 
 const App = () => {
-    return (
-        <ImageAPIContextProvider>
-            <ImageIdContextProvider>
-                <Gallery />
-            </ImageIdContextProvider>
-        </ImageAPIContextProvider>
-    );
+    return <Gallery />;
 };
 
 export default App;

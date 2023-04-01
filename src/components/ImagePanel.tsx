@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Image from 'components/Image';
-import { Image as ImageType, ImageAPIContext } from 'context/ImageAPIContext';
+import { ImageAPIContext } from 'context/ImageAPIContext';
 import { ImageIdContext } from 'context/ImageIdContext';
 import { theme } from 'globalStyle';
 import useDeleteImage from 'hooks/useDeleteImage';
 import { formatDate } from 'utils';
+import { Image as ImageType } from './commonTypes';
 import InfoItem from './InfoItem';
 
 const ImagePanel = () => {
@@ -16,13 +17,10 @@ const ImagePanel = () => {
     const { deleteImage } = useDeleteImage();
 
     useEffect(() => {
-        if (!images || images.length === 0) return;
+        if (!images) return;
 
         const imageMatch = images.find((image) => image.id === imageId);
-
-        if (!imageId || !imageMatch) setImageId(images[0].id);
-
-        setSelectedImage(images.find((image) => image.id === imageId));
+        setSelectedImage(imageMatch);
     }, [images, imageId, setImageId]);
 
     return (
@@ -67,7 +65,7 @@ const ImagePanel = () => {
                     </ContentWrapper>
                 </>
             ) : (
-                <div>No image selected</div>
+                <NoImage>No image selected</NoImage>
             )}
         </PreviewPanelEl>
     );
@@ -83,7 +81,7 @@ const PreviewPanelEl = styled.aside`
     display: flex;
     width: 600px;
     height: 100%;
-    background: ${theme.backgroundPrimary};
+    background: ${theme.backgroundSecondary};
     border-left: 2px solid ${theme.border};
     overflow-y: auto;
 `;
@@ -124,4 +122,10 @@ const DeleteButton = styled.button`
     :hover {
         border-color: ${theme.highlight};
     }
+`;
+
+const NoImage = styled.p`
+    place-self: center;
+    margin: auto;
+    color: ${theme.textSecondary};
 `;

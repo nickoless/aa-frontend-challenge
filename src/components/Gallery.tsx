@@ -1,23 +1,28 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
+import { ImageAPIContextProvider } from 'context/ImageAPIContext';
+import { ImageIdContextProvider } from 'context/ImageIdContext';
+import { ImageSortContextProvider } from 'context/ImageSortContext';
 import { theme } from 'globalStyle';
-import { Sort } from './commonTypes';
 import GalleryHeader from './GalleryHeader';
 import GalleryItems from './GalleryItems';
 import ImagePanel from './ImagePanel';
 
 const Gallery = () => {
-    const [sort, setSort] = useState<Sort>('recent');
-
     return (
-        <GalleryEl>
-            <GalleryWrapper>
-                <GalleryHeader sort={sort} setSort={setSort} />
-                <GalleryItems sort={sort} />
-            </GalleryWrapper>
-            <ImagePanel />
-        </GalleryEl>
+        <ImageAPIContextProvider>
+            <ImageIdContextProvider>
+                <ImageSortContextProvider>
+                    <GalleryEl>
+                        <GalleryWrapper>
+                            <GalleryHeader />
+                            <GalleryItems />
+                        </GalleryWrapper>
+                        <ImagePanel />
+                    </GalleryEl>
+                </ImageSortContextProvider>
+            </ImageIdContextProvider>
+        </ImageAPIContextProvider>
     );
 };
 
@@ -33,6 +38,6 @@ const GalleryWrapper = styled.main`
     flex: 3;
     margin-right: 600px;
     padding: 3rem;
-    background: ${theme.backgroundSecondary};
+    background: ${theme.backgroundPrimary};
     height: 100%;
 `;

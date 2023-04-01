@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { ReactComponent as Heart } from 'assets/heart.svg';
-import { Image as ImageType } from 'context/ImageAPIContext';
+import { Image as ImageType } from './commonTypes';
 import { ImageIdContext } from 'context/ImageIdContext';
 import { theme } from 'globalStyle';
 import useFavoriteImage from 'hooks/useFavoriteImage';

@@ -1,19 +1,5 @@
 import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
-
-export interface Image {
-    createdAt: string;
-    description?: string;
-    dimensions: { height: number; width: number };
-    favorited: boolean;
-    filename: string;
-    id: string;
-    resolution: { height: number; width: number };
-    sharedWith: [];
-    sizeInBytes: number;
-    updatedAt: string;
-    uploadedBy: string;
-    url: string;
-}
+import { Image } from 'components/commonTypes';
 
 interface ImageAPIContextType {
     images: Image[];
@@ -45,12 +31,11 @@ const ImageAPIContextProvider = ({ children }) => {
                 }
 
                 const data = await response.json();
-                const sortedImages = sortImages(data);
-
-                setImages(sortedImages);
-                setIsLoading(false);
+                setImages(data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -71,11 +56,3 @@ const ImageAPIContextProvider = ({ children }) => {
 };
 
 export { ImageAPIContext, ImageAPIContextProvider };
-
-const sortImages = (images) => {
-    const sortedImages = images.sort(
-        (a, b) => new Date(b?.createdAt).getTime() - new Date(a?.createdAt).getTime()
-    );
-
-    return sortedImages;
-};

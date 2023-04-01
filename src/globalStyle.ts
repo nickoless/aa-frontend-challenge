@@ -3,8 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 /** Base theme */
 
 export const theme = {
-    backgroundPrimary: '#F5F5F5',
-    backgroundSecondary: '#E6E9EC',
+    backgroundPrimary: '#E6E9EC',
+    backgroundSecondary: '#F5F5F5',
     textPrimary: '#343a40',
     textSecondary: '#6c757d',
     highlight: '#612CE8',
@@ -16,7 +16,7 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
-        background: ${theme.backgroundSecondary};
+        background: ${theme.backgroundPrimary};
         color: ${theme.textPrimary};
         font-family: 'Lato', sans-serif;
     }

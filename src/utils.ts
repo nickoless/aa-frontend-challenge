@@ -1,3 +1,5 @@
+import { Image } from 'components/commonTypes';
+
 /**
  * Formats bytes into a more readable format (via https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript)
  * @param bytes
@@ -27,4 +29,16 @@ export const formatDate = (dateString: string) => {
     });
 
     return date;
+};
+
+/** Takes an array of images and sorts them in a descending order based on the
+ * createdAt date
+ * @param Image[]
+ */
+export const sortImages = (images: Image[]) => {
+    const sortedImages = images.sort(
+        (a, b) => new Date(b?.createdAt).getTime() - new Date(a?.createdAt).getTime()
+    );
+
+    return sortedImages;
 };

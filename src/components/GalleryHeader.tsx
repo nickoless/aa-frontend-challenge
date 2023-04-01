@@ -1,14 +1,12 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
+import { ImageSortContext } from 'context/ImageSortContext';
 import { theme } from 'globalStyle';
-import { SetSort, Sort } from './commonTypes';
 
-interface Props {
-    sort: Sort;
-    setSort: SetSort;
-}
+const GalleryHeader = () => {
+    const { sort, setSort } = useContext(ImageSortContext);
 
-const GalleryHeader = ({ sort, setSort }: Props) => {
     return (
         <GalleryHeaderEl>
             <Heading>Photos</Heading>
