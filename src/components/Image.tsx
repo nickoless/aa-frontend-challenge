@@ -46,13 +46,13 @@ export default Image;
 // STYLES
 
 const ImageWrapper = styled.article`
-    max-width: ${({ $imagePanel }) => ($imagePanel ? '500px' : '250px')};
+    max-width: ${({ $imagePanel }) => ($imagePanel ? '415px' : '200px')};
 `;
 
 const ImageEl = styled.img<{ $imagePanel?: boolean; $isSelected: boolean }>`
     cursor: pointer;
-    height: ${({ $imagePanel }) => ($imagePanel ? '300px' : '175px')};
-    width: ${({ $imagePanel }) => ($imagePanel ? '500px' : '250px')};
+    height: ${({ $imagePanel }) => ($imagePanel ? '275px' : '150px')};
+    width: ${({ $imagePanel }) => ($imagePanel ? '415px' : '200px')};
     border-radius: 10px;
     object-fit: cover;
     box-sizing: border-box;
@@ -74,7 +74,7 @@ const FilenameWrapper = styled.div<{ $imagePanel?: boolean }>`
 `;
 
 const Filename = styled.p<{ $imagePanel?: boolean; $isSelected: boolean }>`
-    font-size: ${({ $imagePanel }) => ($imagePanel ? '1.5rem' : '1rem')};
+    font-size: ${({ $imagePanel }) => ($imagePanel ? '1.25rem' : '1rem')};
     font-weight: bold;
     margin: 0;
     white-space: nowrap;
@@ -93,5 +93,5 @@ const HeartIcon = styled(Heart)<{ $favorited: boolean }>`
     width: 30px;
     stroke: ${theme.textSecondary};
 
-    ${({ $favorited }) => $favorited && 'stroke: red; fill: red'};
+    ${({ $favorited }) => $favorited && `stroke: ${theme.favorite}; fill: ${theme.favorite};`};
 `;

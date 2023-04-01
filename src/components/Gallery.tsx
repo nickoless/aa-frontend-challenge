@@ -36,7 +36,7 @@ const GalleryEl = styled.div`
 
 const GalleryWrapper = styled.main`
     flex: 3;
-    margin-right: 600px;
+    margin-right: 515px;
     padding: 3rem;
     background: ${theme.backgroundPrimary};
     height: 100%;

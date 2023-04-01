@@ -7,8 +7,9 @@ export const theme = {
     backgroundSecondary: '#F5F5F5',
     textPrimary: '#343a40',
     textSecondary: '#6c757d',
+    border: '#D3D9DD',
     highlight: '#612CE8',
-    border: '#D3D9DD'
+    favorite: '#A83F39'
 };
 
 /** Global / default styles */
@@ -19,10 +20,6 @@ export const GlobalStyle = createGlobalStyle`
         background: ${theme.backgroundPrimary};
         color: ${theme.textPrimary};
         font-family: 'Lato', sans-serif;
-    }
-
-    p {
-        color: ${theme.textPrimary};
     }
 `;
 

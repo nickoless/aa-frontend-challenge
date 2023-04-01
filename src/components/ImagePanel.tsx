@@ -79,7 +79,8 @@ const PreviewPanelEl = styled.aside`
     position: fixed;
     right: 0;
     display: flex;
-    width: 600px;
+    justify-content: center;
+    width: 515px;
     height: 100%;
     background: ${theme.backgroundSecondary};
     border-left: 2px solid ${theme.border};
@@ -91,7 +92,8 @@ const ContentWrapper = styled.div`
 `;
 
 const Heading = styled.h2`
-    margin-top: 3rem;
+    font-size: 1.25rem;
+    margin-top: 2.5rem;
 `;
 
 const InfoWrapper = styled.div`
@@ -110,10 +112,10 @@ const Description = styled.p`
 
 const DeleteButton = styled.button`
     cursor: pointer;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     margin-bottom: 6rem;
     width: 100%;
-    height: 60px;
+    height: 50px;
     font-size: 1rem;
     background: transparent;
     border: 2px solid ${theme.border};

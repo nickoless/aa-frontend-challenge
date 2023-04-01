@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import theme from 'globalStyle';
+import { theme } from 'globalStyle';
 
 interface Props {
     description: string;
@@ -24,7 +24,7 @@ const InfoItemEl = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 4rem;
+    height: 3.5rem;
     font-weight: bold;
 
     p:first-child {

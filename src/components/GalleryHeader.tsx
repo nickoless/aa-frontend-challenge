@@ -32,6 +32,7 @@ const GalleryHeaderEl = styled.div`
 `;
 
 const Heading = styled.h1`
+    margin-top: 0;
     font-weight: 900;
 `;
 
