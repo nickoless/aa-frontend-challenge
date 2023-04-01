@@ -23,7 +23,7 @@ const ImagePanel = () => {
         if (!imageId || !imageMatch) setImageId(images[0].id);
 
         setSelectedImage(images.find((image) => image.id === imageId));
-    }, [images, imageId]);
+    }, [images, imageId, setImageId]);
 
     return (
         <PreviewPanelEl>
@@ -67,7 +67,7 @@ const ImagePanel = () => {
                     </ContentWrapper>
                 </>
             ) : (
-                <div>Nothing to see here</div>
+                <div>No image selected</div>
             )}
         </PreviewPanelEl>
     );
